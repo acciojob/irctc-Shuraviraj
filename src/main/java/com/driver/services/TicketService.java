@@ -12,6 +12,7 @@ import com.driver.repository.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.el.ELException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +47,8 @@ public class TicketService {
         //And the end return the ticketId that has come from db
 
         //get the train
-        Train train = trainRepository.findById(bookTicketEntryDto.getTrainId()).get();
+        Train train = trainRepository.findById(bookTicketEntryDto.getTrainId())
+                .orElseThrow(() -> new Exception("Train Id not valid"));
 
         //getting the booked list
         List<Ticket> bookedTickets = train.getBookedTickets();
