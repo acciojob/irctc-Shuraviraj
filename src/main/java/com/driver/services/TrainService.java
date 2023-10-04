@@ -28,7 +28,7 @@ public class TrainService {
         //and route String logic to be taken from the Problem statement.
         //Save the train and return the trainId that is generated from the database.
         //Avoid using the lombok library
-        Train train = TrainService.transformAddTrainEntryDtoToTrain(trainEntryDto);
+        Train train = transformAddTrainEntryDtoToTrain(trainEntryDto);
         Train savedTrain = trainRepository.save(train);
         return savedTrain.getTrainId();
     }
@@ -171,7 +171,7 @@ public class TrainService {
         return ans;
     }
 
-    public static Train transformAddTrainEntryDtoToTrain(AddTrainEntryDto trainEntryDto) {
+    private Train transformAddTrainEntryDtoToTrain(AddTrainEntryDto trainEntryDto) {
         Train train = new Train();
 
         //creating route
@@ -191,7 +191,7 @@ public class TrainService {
         return train;
     }
 
-    public static int getBookedSeat(List<Ticket> bookedTickets, Station fromStation, Station toStation, Train train) {
+    public int getBookedSeat(List<Ticket> bookedTickets, Station fromStation, Station toStation, Train train) {
         int from = 0, to = 0;
 
         String[] routes = train.getRoute().split(",");

@@ -52,8 +52,7 @@ public class TicketService {
         List<Ticket> bookedTickets = train.getBookedTickets();
 
         //getting the booked tickets from src to dest
-        int bookedTicketFromSrcToDest = TrainService
-                .getBookedSeat(bookedTickets, bookTicketEntryDto.getFromStation(), bookTicketEntryDto.getToStation(), train);
+        int bookedTicketFromSrcToDest = new TrainService().getBookedSeat(bookedTickets, bookTicketEntryDto.getFromStation(), bookTicketEntryDto.getToStation(), train);
 
         //checking if the seats are available
         int totalSeats = train.getNoOfSeats();
