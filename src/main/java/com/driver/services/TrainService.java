@@ -157,14 +157,17 @@ public class TrainService {
 
         for (Train train : trainList) {
             String[] trainRoute = train.getRoute().split(",");
+            int cnt = 0;
             for (String s : trainRoute) {
                 if (s.equals("" + station)) {
-                    ans.add(train.getTrainId());
+                    LocalTime departureTime = train.getDepartureTime();
+                    LocalTime crossingTime = departureTime.plusHours(cnt);
+                    if (crossingTime.isAfter(startTime) && crossingTime.isBefore(endTime) || crossingTime.equals(startTime) || crossingTime.equals(endTime)) {
+                        ans.add(train.getTrainId());
+                    }
                 }
+                cnt++;
             }
-        }
-        if (ans.size() == 2) {
-            ans.add(2);
         }
         return ans;
     }
