@@ -100,9 +100,14 @@ public class TrainService {
         String[] route = train.getRoute().split(",");
 
         //checking if train passes the toute
+        boolean test = false;
         for (String s : route) {
-            if (s.equals("" + station)) throw new Exception("Train is not passing from this station");
+            if (s.equals("" + station)) {
+                test = true;
+                break;
+            }
         }
+        if (!test) throw new Exception("Train is not passing from this station");
 
         //finding out the number of people boarding at a station
         Integer ans = 0;
