@@ -9,7 +9,6 @@ import com.driver.model.Train;
 import com.driver.repository.PassengerRepository;
 import com.driver.repository.TicketRepository;
 import com.driver.repository.TrainRepository;
-import com.driver.transformer.TrainTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +52,7 @@ public class TicketService {
         List<Ticket> bookedTickets = train.getBookedTickets();
 
         //getting the booked tickets from src to dest
-        int bookedTicketFromSrcToDest = TrainTransformer
+        int bookedTicketFromSrcToDest = TrainService
                 .getBookedSeat(bookedTickets, bookTicketEntryDto.getFromStation(), bookTicketEntryDto.getToStation(), train);
 
         //checking if the seats are available
