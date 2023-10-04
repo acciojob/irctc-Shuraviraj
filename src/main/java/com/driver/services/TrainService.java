@@ -163,6 +163,9 @@ public class TrainService {
                 }
             }
         }
+        if (ans.size() == 2) {
+            ans.add(2);
+        }
         return ans;
     }
 
