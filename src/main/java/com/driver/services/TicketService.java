@@ -78,7 +78,7 @@ public class TicketService {
             if (s.equals("" + bookTicketEntryDto.getFromStation())) cnt++;
             if (s.equals("" + bookTicketEntryDto.getToStation())) cnt++;
         }
-        if (cnt != 2) throw new Exception("Invalid stations");
+        if (cnt != 2) return null;
 
 
         //setting src and dest in ticket
