@@ -13,7 +13,10 @@ import com.driver.transformer.TrainTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TicketService {
@@ -72,13 +75,10 @@ public class TicketService {
 
 
         //checking if the train passes through the stations
-        String[] stations = train.getRoute().split(",");
-        int cnt = 0;
-        for (String s : stations) {
-            if (s.equals("" + bookTicketEntryDto.getFromStation())) cnt++;
-            else if (s.equals("" + bookTicketEntryDto.getToStation())) cnt++;
+        Set<String> hs = new HashSet<>(Arrays.asList(train.getRoute().split(",")));
+        if (!hs.contains("" + bookTicketEntryDto.getFromStation()) || !hs.contains("" + bookTicketEntryDto.getToStation())) {
+            throw new Exception("Invalid stations");
         }
-        if (cnt < 2) throw new Exception("Invalid stations");
 
 
         //setting src and dest in ticket
